@@ -1,0 +1,22 @@
+// 0. 완전탐색
+// 1. 브루트포스 방식
+// 2. 3중 for문
+// 3. 중복수 제외
+class Solution {
+    public int solution(int[] number) {
+        int answer = 0;
+        int length = number.length;
+        int sum = 0;
+        
+        for (int i = 0; i < length - 2; i++) {
+            for (int j = i + 1; j < length - 1; j++) {
+                for (int k = j + 1; k < length; k++) {
+                    if (number[i] + number[j] + number[k] == 0) {
+                    answer++;
+                    }
+                }
+            }
+        }
+        return answer;
+    }
+}
