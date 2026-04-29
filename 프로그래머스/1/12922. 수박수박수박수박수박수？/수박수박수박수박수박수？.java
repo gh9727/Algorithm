@@ -1,16 +1,15 @@
-// 1: 수
-// 2: 박
-// 5: 수박수박수
-// String item1 = "수" String item2 = "박"
-// n % 2 == 1 홀수 == 0 짝수 --> 배열로 활용해보자
 class Solution {
     public String solution(int n) {
-        String[] items = {"수", "박"};
-        String answer = "";
+        StringBuilder sb = new StringBuilder();
+        char[] arr = {'수', '박'};
         
-        for(int i = 2; i <= n + 1; i++) {
-            answer += items[i % 2];    
+        for(int i = 0; i < n; i++) {
+            if(i % 2 == 0) {
+                sb.append(arr[0]);
+            } else {
+                sb.append(arr[1]);
+            }
         }
-        return answer;
+        return sb.toString();
     }
 }
