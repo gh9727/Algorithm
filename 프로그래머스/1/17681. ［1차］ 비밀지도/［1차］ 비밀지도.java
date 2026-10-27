@@ -4,16 +4,11 @@ class Solution {
         int[][] arr2BlockState = new int[n][n];
         int[][] result = new int[n][n];
         
-        // arr1BlockState = calcBlock(arr1, arr1BlockState);
         calcBlock(arr1, arr1BlockState);
-        // arr2BlockState = calcBlock(arr2, arr2BlockState);
         calcBlock(arr2, arr2BlockState);
         
-        // arr1BlockState = reverseBlock(arr1BlockState);
         reverseBlock(arr1BlockState);
         reverseBlock(arr2BlockState);
-        // arr2BlockState = reverseBlock(arr2BlockState);
-      
         result = overlapBlock(arr1BlockState,arr2BlockState);
         
         return changeWord(result);
@@ -22,9 +17,9 @@ class Solution {
     private void calcBlock(int[] arr, int[][] blockState) {
         int n = arr.length;
         for(int i = 0; i < n; i++) {
-            int blockNum = arr[i]; // 9
+            int blockNum = arr[i]; 
             for(int j = n - 1; j >= 0; j--) {
-               int pow = (int) Math.pow(2, j); // 8
+               int pow = (int) Math.pow(2, j); 
                if(blockNum >= pow) {
                    blockNum -= pow;
                    blockState[i][j] = 1;
@@ -34,7 +29,6 @@ class Solution {
                if(blockNum < 0) break;
             }
         }
-        // return blockState;
     }
     
     private void reverseBlock(int[][] blockState) {
@@ -52,7 +46,6 @@ class Solution {
                 end--;
             }
         }
-        // return blockState;
     }
     private int[][] overlapBlock(int[][] blockState1, int[][] blockState2) {
         int n = blockState1.length;
