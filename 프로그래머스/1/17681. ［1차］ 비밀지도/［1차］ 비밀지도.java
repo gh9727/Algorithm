@@ -1,77 +1,16 @@
 class Solution {
-    public String[] solution(int n, int[] arr1, int[] arr2) {
-        int[][] arr1BlockState = new int[n][n];
-        int[][] arr2BlockState = new int[n][n];
-        int[][] result = new int[n][n];
-        
-        calcBlock(arr1, arr1BlockState);
-        calcBlock(arr2, arr2BlockState);
-        
-        reverseBlock(arr1BlockState);
-        reverseBlock(arr2BlockState);
-        result = overlapBlock(arr1BlockState,arr2BlockState);
-        
-        return changeWord(result);
-    }
-    
-    private void calcBlock(int[] arr, int[][] blockState) {
-        int n = arr.length;
-        for(int i = 0; i < n; i++) {
-            int blockNum = arr[i]; 
-            for(int j = n - 1; j >= 0; j--) {
-               int pow = (int) Math.pow(2, j); 
-               if(blockNum >= pow) {
-                   blockNum -= pow;
-                   blockState[i][j] = 1;
-               } else {
-                   blockState[i][j] = 0;
-               }
-               if(blockNum < 0) break;
-            }
-        }
-    }
-    
-    private void reverseBlock(int[][] blockState) {
-        int n = blockState.length;
-        
-        for(int i = 0; i < n; i++) {
-            int start = 0;
-            int end = blockState[i].length - 1;
-        
-            while(start < end) {
-                int temp = blockState[i][start];
-                blockState[i][start] = blockState[i][end];
-                blockState[i][end] = temp;
-                start++;
-                end--;
-            }
-        }
-    }
-    private int[][] overlapBlock(int[][] blockState1, int[][] blockState2) {
-        int n = blockState1.length;
-        int[][] result = new int[n][n];
-        
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(blockState1[i][j] == 0 && blockState2[i][j] == 0) continue;
-                result[i][j] = 1;
-            }
-        }
-        return result;
-    }
-    private String[] changeWord(int[][] blockState) {
-        int n = blockState.length;
+  public String[] solution(int n, int[] arr1, int[] arr2) {
         String[] result = new String[n];
-        for(int i = 0; i < n; i++) {
-            result[i] = "";
-            for(int j = 0; j < n; j++) {
-                if(blockState[i][j] == 1) {
-                    result[i] += "#";
-                } else {
-                    result[i] += " ";
-                }
-            }
+        for (int i = 0; i < n; i++) {
+            result[i] = Integer.toBinaryString(arr1[i] | arr2[i]);
         }
+
+        for (int i = 0; i < n; i++) {
+            result[i] = String.format("%" + n + "s", result[i]);
+            result[i] = result[i].replaceAll("1", "#");
+            result[i] = result[i].replaceAll("0", " ");
+        }
+
         return result;
     }
 }
