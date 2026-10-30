@@ -1,17 +1,15 @@
 class Solution {
     boolean solution(String s) {
-        int count = 0;
-        char[] arr = s.toCharArray();
+        if(s.charAt(0) == ')' || s.charAt(s.length() - 1) == '(') return false; 
         
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] == '(') {
-                count++;
-            } else {
-                count--;
-            }
-            if(count < 0) return false; // ) 개수가 ( 개수를 초월한다면 false
+        int count = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') ++count;
+            else --count;
+            
+            if(count < 0) return false;
         }
         
-        return count == 0;
+        return count == 0 ? true : false;
     }
 }
